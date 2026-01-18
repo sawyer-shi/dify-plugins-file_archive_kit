@@ -1,0 +1,71 @@
+identity:
+  author: "sawyer-shi"
+  name: "compress_encrypt"
+  label:
+    en_US: "Encrypted Compress"
+    zh_Hans: "加密压缩 (AES保护)"
+description:
+  human:
+    en_US: "Compress files with password using AES encryption (ZIP/7Z)."
+    zh_Hans: "使用密码加密压缩文件，支持 .zip 和 .7z 格式。"
+  llm: "Compress files with password using AES encryption (ZIP/7Z)."
+class_name: CompressEncryptTool
+parameters:
+  - name: files
+    label:
+      en_US: "Files"
+      zh_Hans: "文件列表"
+    type: files
+    required: true
+    form: llm
+    human_description:
+      en_US: "The files to be compressed and encrypted."
+      zh_Hans: "要压缩并加密的文件列表。"
+    llm_description: "The files to be compressed and encrypted."
+  - name: archive_name
+    label:
+      en_US: "Filename"
+      zh_Hans: "压缩包名"
+    type: string
+    required: true
+    default: "secure"
+    form: llm
+    human_description:
+      en_US: "The name of the encrypted archive file."
+      zh_Hans: "加密压缩包的文件名。"
+    llm_description: "The name of the encrypted archive file."
+  - name: format
+    label:
+      en_US: "Format"
+      zh_Hans: "格式"
+    type: select
+    required: true
+    default: "zip"
+    form: llm
+    human_description:
+      en_US: "The compression format."
+      zh_Hans: "压缩格式。"
+    llm_description: "The compression format."
+    options:
+      - value: "zip"
+        label:
+          en_US: ".zip (AES-256)"
+          zh_Hans: ".zip (AES-256)"
+      - value: "7z"
+        label:
+          en_US: ".7z (AES-256)"
+          zh_Hans: ".7z (AES-256)"
+  - name: password
+    label:
+      en_US: "Password"
+      zh_Hans: "密码"
+    type: string
+    required: true
+    form: llm
+    human_description:
+      en_US: "The password for encryption."
+      zh_Hans: "加密密码。"
+    llm_description: "The password for encryption."
+extra:
+  python:
+    source: tools/compress_encrypt.py

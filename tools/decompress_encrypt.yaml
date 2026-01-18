@@ -1,0 +1,38 @@
+identity:
+  author: "sawyer-shi"
+  name: "decompress_encrypt"
+  label:
+    en_US: "Encrypted Decompress"
+    zh_Hans: "加密解压 (自动识别)"
+description:
+  human:
+    en_US: "Extract files from password-protected ZIP or 7Z archives."
+    zh_Hans: "使用密码解压 ZIP 或 7Z 加密文件。"
+  llm: "Extract files from password-protected ZIP or 7Z archives."
+class_name: DecompressEncryptTool
+parameters:
+  - name: archive_file
+    label:
+      en_US: "Encrypted File"
+      zh_Hans: "加密文件"
+    type: file
+    required: true
+    form: llm
+    human_description:
+      en_US: "The encrypted archive file to extract."
+      zh_Hans: "要解压的加密压缩包文件。"
+    llm_description: "The encrypted archive file to extract."
+  - name: password
+    label:
+      en_US: "Password"
+      zh_Hans: "密码"
+    type: string
+    required: true
+    form: llm
+    human_description:
+      en_US: "The password for decryption."
+      zh_Hans: "解密密码。"
+    llm_description: "The password for decryption."
+extra:
+  python:
+    source: tools/decompress_encrypt.py

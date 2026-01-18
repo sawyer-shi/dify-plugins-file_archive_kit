@@ -1,0 +1,27 @@
+identity:
+  author: "sawyer-shi"
+  name: "decompress_normal"
+  label:
+    en_US: "Universal Decompress"
+    zh_Hans: "万能解压 (自动识别)"
+description:
+  human:
+    en_US: "Automatically extract files from ZIP, 7Z, or TAR.GZ archives."
+    zh_Hans: "自动识别并解压 ZIP, 7Z 或 TAR.GZ 格式的压缩包。"
+  llm: "Automatically extract files from ZIP, 7Z, or TAR.GZ archives."
+class_name: DecompressNormalTool
+parameters:
+  - name: archive_file
+    label:
+      en_US: "Archive File"
+      zh_Hans: "压缩包文件"
+    type: file
+    required: true
+    form: llm
+    human_description:
+      en_US: "The archive file to extract."
+      zh_Hans: "要解压的压缩包文件。"
+    llm_description: "The archive file to extract."
+extra:
+  python:
+    source: tools/decompress_normal.py

@@ -1,0 +1,64 @@
+identity:
+  author: "sawyer-shi"
+  name: "compress_normal"
+  label:
+    en_US: "Universal Compress"
+    zh_Hans: "万能压缩 (无密码)"
+description:
+  human:
+    en_US: "Compress files into ZIP, 7Z, or TAR.GZ formats without password."
+    zh_Hans: "将文件压缩为 ZIP, 7Z 或 TAR.GZ 格式 (不加密)。"
+  llm: "Compress files into ZIP, 7Z, or TAR.GZ formats without password."
+class_name: CompressNormalTool
+parameters:
+  - name: files
+    label:
+      en_US: "Files to Compress"
+      zh_Hans: "待压缩文件列表"
+    type: files
+    required: true
+    form: llm
+    human_description:
+      en_US: "The files to be compressed."
+      zh_Hans: "要压缩的文件列表。"
+    llm_description: "The files to be compressed."
+  - name: archive_name
+    label:
+      en_US: "Filename (No Extension)"
+      zh_Hans: "压缩包名称 (无后缀)"
+    type: string
+    required: true
+    default: "archive"
+    form: llm
+    human_description:
+      en_US: "The name of the archive file without extension."
+      zh_Hans: "压缩包文件名，不包含扩展名。"
+    llm_description: "The name of the archive file without extension."
+  - name: format
+    label:
+      en_US: "Format"
+      zh_Hans: "压缩格式"
+    type: select
+    required: true
+    default: "zip"
+    form: llm
+    human_description:
+      en_US: "The compression format."
+      zh_Hans: "压缩格式。"
+    llm_description: "The compression format."
+    options:
+      - value: "zip"
+        label:
+          en_US: ".zip (通用)"
+          zh_Hans: ".zip (通用)"
+      - value: "7z"
+        label:
+          en_US: ".7z (高压缩比)"
+          zh_Hans: ".7z (高压缩比)"
+      - value: "tar.gz"
+        label:
+          en_US: ".tar.gz (Linux常用)"
+          zh_Hans: ".tar.gz (Linux常用)"
+extra:
+  python:
+    source: tools/compress_normal.py

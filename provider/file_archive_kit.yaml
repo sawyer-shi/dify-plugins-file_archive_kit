@@ -1,0 +1,19 @@
+identity:
+  author: "sawyer-shi"
+  name: "file_archive_kit"
+  label:
+    en_US: "File Archive Kit"
+    zh_Hans: "文件压缩与解压工具"
+  description:
+    en_US: "Local File Archive Tool: Supports ZIP, 7Z, TAR.GZ formats. Includes password protection capabilities."
+    zh_Hans: "本地文件压缩与解压工具：支持 ZIP, 7Z, TAR.GZ 格式的压缩与解压，包含密码加密功能。"
+  icon: "icon.png"
+tools:
+  - tools/compress_normal.yaml
+  - tools/decompress_normal.yaml
+  - tools/compress_encrypt.yaml
+  - tools/decompress_encrypt.yaml
+
+extra:
+  python:
+    source: provider/file_archive_kit.py
