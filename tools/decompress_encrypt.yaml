@@ -3,12 +3,12 @@ identity:
   name: "decompress_encrypt"
   label:
     en_US: "Encrypted Decompress"
-    zh_Hans: "加密解压 (自动识别)"
+    zh_Hans: "解压文件--密码保护"
 description:
   human:
-    en_US: "Extract files from password-protected ZIP or 7Z archives."
-    zh_Hans: "使用密码解压 ZIP 或 7Z 加密文件。"
-  llm: "Extract files from password-protected ZIP or 7Z archives."
+    en_US: "Extract files from password-protected .zip/.7z archives."
+    zh_Hans: "使用密码解压 .zip 或 .7z 加密文件。"
+  llm: "Extract files from password-protected .zip/.7z archives."
 class_name: DecompressEncryptTool
 parameters:
   - name: archive_file

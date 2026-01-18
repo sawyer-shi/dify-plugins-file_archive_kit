@@ -3,12 +3,12 @@ identity:
   name: "compress_normal"
   label:
     en_US: "Universal Compress"
-    zh_Hans: "万能压缩 (无密码)"
+    zh_Hans: "压缩文件"
 description:
   human:
-    en_US: "Compress files into ZIP, 7Z, or TAR.GZ formats without password."
-    zh_Hans: "将文件压缩为 ZIP, 7Z 或 TAR.GZ 格式 (不加密)。"
-  llm: "Compress files into ZIP, 7Z, or TAR.GZ formats without password."
+    en_US: "Compress files into .zip, .7z, or .tar.gz formats."
+    zh_Hans: "将文件压缩为 .zip, .7z 或 tar.gz 格式 。"
+  llm: "Compress files into .zip, .7z, or .tar.gz formats."
 class_name: CompressNormalTool
 parameters:
   - name: files

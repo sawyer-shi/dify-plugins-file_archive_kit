@@ -3,12 +3,12 @@ identity:
   name: "compress_encrypt"
   label:
     en_US: "Encrypted Compress"
-    zh_Hans: "加密压缩 (AES保护)"
+    zh_Hans: "压缩文件--密码保护"
 description:
   human:
-    en_US: "Compress files with password using AES encryption (ZIP/7Z)."
+    en_US: "Compress files with password using AES encryption (.zip/.7z)."
     zh_Hans: "使用密码加密压缩文件，支持 .zip 和 .7z 格式。"
-  llm: "Compress files with password using AES encryption (ZIP/7Z)."
+  llm: "Compress files with password using AES encryption (.zip/.7z)."
 class_name: CompressEncryptTool
 parameters:
   - name: files

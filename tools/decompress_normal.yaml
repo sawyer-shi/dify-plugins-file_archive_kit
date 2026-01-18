@@ -3,12 +3,12 @@ identity:
   name: "decompress_normal"
   label:
     en_US: "Universal Decompress"
-    zh_Hans: "万能解压 (自动识别)"
+    zh_Hans: "解压文件"
 description:
   human:
-    en_US: "Automatically extract files from ZIP, 7Z, or TAR.GZ archives."
-    zh_Hans: "自动识别并解压 ZIP, 7Z 或 TAR.GZ 格式的压缩包。"
-  llm: "Automatically extract files from ZIP, 7Z, or TAR.GZ archives."
+    en_US: "Automatically extract files from .zip, .7z, or .tar.gz archives."
+    zh_Hans: "自动识别并解压 .zip, .7z 或 tar.gz 格式的压缩包。"
+  llm: "Automatically extract files from .zip, .7z, or .tar.gz archives."
 class_name: DecompressNormalTool
 parameters:
   - name: archive_file
