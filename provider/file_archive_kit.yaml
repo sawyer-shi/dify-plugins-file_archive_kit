@@ -12,6 +12,7 @@ tools:
   - tools/compress_normal.yaml
   - tools/decompress_normal.yaml
   - tools/compress_encrypt.yaml
+  - tools/compress_encrypt_auto.yaml
   - tools/decompress_encrypt.yaml
 
 extra:

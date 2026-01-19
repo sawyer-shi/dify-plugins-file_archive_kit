@@ -3,6 +3,7 @@ import tarfile
 import pyzipper
 import py7zr
 from dify_plugin import Tool
+from .file_utils import get_file_type
 
 class DecompressNormalTool(Tool):
     def _invoke(self, tool_parameters: dict):
@@ -21,7 +22,7 @@ class DecompressNormalTool(Tool):
                         if not clean_name: continue
                         yield self.create_blob_message(
                             blob=zf.read(name),
-                            meta={"filename": clean_name}
+                            meta={"filename": clean_name, "mime_type": get_file_type(clean_name)}
                         )
                         extracted_count += 1
 
@@ -34,7 +35,7 @@ class DecompressNormalTool(Tool):
                         bio.seek(0)
                         yield self.create_blob_message(
                             blob=bio.read(),
-                            meta={"filename": clean_name}
+                            meta={"filename": clean_name, "mime_type": get_file_type(clean_name)}
                         )
                         extracted_count += 1
 
@@ -49,7 +50,7 @@ class DecompressNormalTool(Tool):
                                 if not clean_name: continue
                                 yield self.create_blob_message(
                                     blob=f_obj.read(),
-                                    meta={"filename": clean_name}
+                                    meta={"filename": clean_name, "mime_type": get_file_type(clean_name)}
                                 )
                                 extracted_count += 1
             else:

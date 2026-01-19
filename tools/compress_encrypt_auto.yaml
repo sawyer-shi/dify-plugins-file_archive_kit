@@ -1,15 +1,15 @@
 identity:
   author: "sawyer-shi"
-  name: "compress_encrypt"
+  name: "compress_encrypt_auto"
   label:
-    en_US: "Encrypted Compress(Manuel Password)"
-    zh_Hans: "压缩文件--手动密码"
+    en_US: "Encrypted Compress (Auto Password)"
+    zh_Hans: "压缩文件--自动密码"
 description:
   human:
-    en_US: "Compress files with password using AES encryption (.zip/.7z)."
-    zh_Hans: "使用密码加密压缩文件，支持 .zip 和 .7z 格式。"
-  llm: "Compress files with password using AES encryption (.zip/.7z)."
-class_name: CompressEncryptTool
+    en_US: "Compress files with auto-generated strong password using AES encryption (.zip/.7z)."
+    zh_Hans: "使用自动生成的强密码加密压缩文件，支持 .zip 和 .7z 格式。"
+  llm: "Compress files with auto-generated strong password using AES encryption (.zip/.7z)."
+class_name: CompressEncryptAutoTool
 parameters:
   - name: files
     label:
@@ -55,17 +55,6 @@ parameters:
         label:
           en_US: ".7z (AES-256)"
           zh_Hans: ".7z (AES-256)"
-  - name: password
-    label:
-      en_US: "Password"
-      zh_Hans: "密码"
-    type: string
-    required: true
-    form: llm
-    human_description:
-      en_US: "The password for encryption."
-      zh_Hans: "加密密码。"
-    llm_description: "The password for encryption."
 extra:
   python:
-    source: tools/compress_encrypt.py
+    source: tools/compress_encrypt_auto.py
