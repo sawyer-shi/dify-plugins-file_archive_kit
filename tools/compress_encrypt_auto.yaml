@@ -2,7 +2,7 @@ identity:
   author: "sawyer-shi"
   name: "compress_encrypt_auto"
   label:
-    en_US: "Encrypted Compress (Auto Password)"
+    en_US: "Encrypted Compress--Auto Password"
     zh_Hans: "压缩文件--自动密码"
 description:
   human:
@@ -28,7 +28,7 @@ parameters:
       zh_Hans: "压缩包名"
     type: string
     required: true
-    default: "secure"
+    default: "archive_auto_password"
     form: llm
     human_description:
       en_US: "The name of the encrypted archive file."
