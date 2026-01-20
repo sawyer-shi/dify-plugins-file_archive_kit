@@ -28,6 +28,8 @@
 - **文件类型识别**: 自动识别并保留 100+ 种文件格式的 MIME 类型
 - **强加密**: 使用 AES-256 加密进行密码保护的归档
 - **自动密码生成**: 为加密自动生成强随机密码
+<img width="738" height="950" alt="Chinese" src="https://github.com/user-attachments/assets/09efbe55-6102-424d-abbb-bc6bb0f32173" />
+<img width="747" height="1050" alt="English" src="https://github.com/user-attachments/assets/2d4c9de1-9311-4a49-aa17-137943e7c71f" />
 
 ## 核心功能
 
