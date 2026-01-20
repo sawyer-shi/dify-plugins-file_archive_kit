@@ -31,7 +31,6 @@ A powerful Dify plugin providing comprehensive **local** file compression and de
 <img width="738" height="950" alt="Chinese" src="https://github.com/user-attachments/assets/09efbe55-6102-424d-abbb-bc6bb0f32173" />
 <img width="747" height="1050" alt="English" src="https://github.com/user-attachments/assets/2d4c9de1-9311-4a49-aa17-137943e7c71f" />
 
-
 ## Core Features
 
 ### Normal Compression
