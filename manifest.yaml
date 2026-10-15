@@ -1,4 +1,4 @@
-version: 0.0.1
+version: 0.0.2
 type: plugin
 tags: 
   - productivity
@@ -14,22 +14,7 @@ description:
 icon: icon.png
 resource:
   memory: 268435456
-  permission:
-    model:
-      enabled: true
-      llm: true
-      text_embedding: false
-      rerank: false
-      tts: false
-      speech2text: false
-      moderation: false
-    endpoint:
-      enabled: true
-    app:
-      enabled: true
-    storage:
-      enabled: true
-      size: 1048576
+  permission: {}
 plugins:
   tools:
     - provider/file_archive_kit.yaml

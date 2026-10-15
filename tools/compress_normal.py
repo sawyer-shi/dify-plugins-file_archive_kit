@@ -4,6 +4,7 @@ import pyzipper
 import py7zr
 from dify_plugin import Tool
 from dify_plugin.entities.tool import ToolInvokeMessage
+from .archive_limits import safe_entry_name
 
 class CompressNormalTool(Tool):
     def _invoke(self, tool_parameters: dict):
@@ -18,23 +19,23 @@ class CompressNormalTool(Tool):
         try:
             if fmt == 'zip':
                 with pyzipper.ZipFile(memory_file, 'w', compression=pyzipper.ZIP_LZMA) as zf:
-                    for f in files:
-                        zf.writestr(f.filename, f.blob)
+                    for i, f in enumerate(files):
+                        zf.writestr(safe_entry_name(f.filename, i), f.blob)
                 mime_type = 'application/zip'
                 extension = 'zip'
 
             elif fmt == '7z':
                 with py7zr.SevenZipFile(memory_file, 'w') as zf:
-                    for f in files:
-                        zf.writestr(f.blob, f.filename)
+                    for i, f in enumerate(files):
+                        zf.writestr(f.blob, safe_entry_name(f.filename, i))
                 mime_type = 'application/x-7z-compressed'
                 extension = '7z'
 
             elif fmt == 'tar.gz':
                 with tarfile.open(fileobj=memory_file, mode='w:gz') as tf:
-                    for f in files:
+                    for i, f in enumerate(files):
                         data = f.blob
-                        info = tarfile.TarInfo(name=f.filename)
+                        info = tarfile.TarInfo(name=safe_entry_name(f.filename, i))
                         info.size = len(data)
                         tf.addfile(info, io.BytesIO(data))
                 mime_type = 'application/gzip'

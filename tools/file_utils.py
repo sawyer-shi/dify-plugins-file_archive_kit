@@ -14,7 +14,7 @@ def get_file_type(filename):
         'pptx': 'application/vnd.openxmlformats-officedocument.presentationml.presentation',
         'jpg': 'image/jpeg',
         'jpeg': 'image/jpeg',
-        'png': 'image/webp',
+        'png': 'image/png',
         'gif': 'image/gif',
         'bmp': 'image/bmp',
         'webp': 'image/webp',

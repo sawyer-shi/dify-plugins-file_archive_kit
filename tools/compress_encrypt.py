@@ -2,6 +2,7 @@ import io
 import pyzipper
 import py7zr
 from dify_plugin import Tool
+from .archive_limits import safe_entry_name
 
 class CompressEncryptTool(Tool):
     def _invoke(self, tool_parameters: dict):
@@ -18,15 +19,15 @@ class CompressEncryptTool(Tool):
             if fmt == 'zip':
                 with pyzipper.AESZipFile(memory_file, 'w', compression=pyzipper.ZIP_LZMA, encryption=pyzipper.WZ_AES) as zf:
                     zf.setpassword(password.encode('utf-8'))
-                    for f in files:
-                        zf.writestr(f.filename, f.blob)
+                    for i, f in enumerate(files):
+                        zf.writestr(safe_entry_name(f.filename, i), f.blob)
                 mime_type = 'application/zip'
                 ext = 'zip'
             
             elif fmt == '7z':
                 with py7zr.SevenZipFile(memory_file, 'w', password=password) as zf:
-                    for f in files:
-                        zf.writestr(f.blob, f.filename)
+                    for i, f in enumerate(files):
+                        zf.writestr(f.blob, safe_entry_name(f.filename, i))
                 mime_type = 'application/x-7z-compressed'
                 ext = '7z'
 

@@ -1,8 +1,8 @@
 import io
-import tarfile
 import pyzipper
 import py7zr
 from dify_plugin import Tool
+from .archive_limits import iter_7z, iter_tar, iter_zip, open_tar, safe_entry_name
 from .file_utils import get_file_type
 
 class DecompressNormalTool(Tool):
@@ -16,43 +16,25 @@ class DecompressNormalTool(Tool):
             if pyzipper.is_zipfile(memory_file):
                 memory_file.seek(0)
                 with pyzipper.ZipFile(memory_file) as zf:
-                    for name in zf.namelist():
-                        if name.endswith('/'): continue
-                        clean_name = name.split('/')[-1]
-                        if not clean_name: continue
-                        yield self.create_blob_message(
-                            blob=zf.read(name),
-                            meta={"filename": clean_name, "mime_type": get_file_type(clean_name)}
-                        )
+                    for name, data in iter_zip(zf):
+                        yield self._blob_message(name, data, extracted_count)
                         extracted_count += 1
 
-            elif py7zr.is_7zfile(memory_file):
-                memory_file.seek(0)
-                with py7zr.SevenZipFile(memory_file, 'r') as zf:
-                    for name, bio in zf.readall().items():
-                        clean_name = name.split('/')[-1]
-                        if not clean_name or not bio: continue
-                        bio.seek(0)
-                        yield self.create_blob_message(
-                            blob=bio.read(),
-                            meta={"filename": clean_name, "mime_type": get_file_type(clean_name)}
-                        )
+            # Use a fresh stream: is_zipfile() moved the position, and is_7zfile() checks from there.
+            elif py7zr.is_7zfile(io.BytesIO(content)):
+                try:
+                    for name, data in iter_7z(io.BytesIO(content)):
+                        yield self._blob_message(name, data, extracted_count)
                         extracted_count += 1
+                except py7zr.exceptions.PasswordRequired:
+                    yield self.create_text_message("Error: This archive is password-protected. Use Encrypted Decompress instead.")
+                    return
 
-            elif tarfile.is_tarfile(memory_file):
-                memory_file.seek(0)
-                with tarfile.open(fileobj=memory_file, mode='r:*') as tf:
-                    for member in tf.getmembers():
-                        if member.isfile():
-                            f_obj = tf.extractfile(member)
-                            if f_obj:
-                                clean_name = member.name.split('/')[-1]
-                                if not clean_name: continue
-                                yield self.create_blob_message(
-                                    blob=f_obj.read(),
-                                    meta={"filename": clean_name, "mime_type": get_file_type(clean_name)}
-                                )
-                                extracted_count += 1
+            elif (tf := open_tar(content)) is not None:
+                with tf:
+                    for name, data in iter_tar(tf):
+                        yield self._blob_message(name, data, extracted_count)
+                        extracted_count += 1
             else:
                 yield self.create_text_message("Unknown file format.")
                 return
@@ -61,3 +43,10 @@ class DecompressNormalTool(Tool):
         
         except Exception as e:
             yield self.create_text_message(f"Error: {str(e)}")
+
+    def _blob_message(self, name, data, index):
+        clean_name = safe_entry_name(name, index)
+        return self.create_blob_message(
+            blob=data,
+            meta={"filename": clean_name, "mime_type": get_file_type(clean_name)}
+        )

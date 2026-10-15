@@ -4,12 +4,13 @@ A powerful Dify plugin providing comprehensive **local** file compression and de
 
 ## Version Information
 
-- **Current Version**: v0.0.1
-- **Release Date**: 2026-01-18
+- **Current Version**: v0.0.2
+- **Release Date**: 2026-10-15
 - **Compatibility**: Dify Plugin Framework
 - **Python Version**: 3.12
 
 ### Version History
+- **v0.0.2** (2026-10-15): Security fixes: upgrade py7zr and pyzipper to patched versions, limit extraction size and entry count, normalize archive entry names, and remove unused permissions
 - **v0.0.1** (2026-01-18): Initial release with compression and decompression capabilities
 
 ## Quick Start
@@ -112,9 +113,9 @@ Compress multiple files into a password-protected archive with auto-generated st
 - Python 3.12
 - Dify Platform access
 - Required Python packages (installed via requirements.txt):
-  - dify_plugin>=0.2.0
-  - pyzipper==0.3.6
-  - py7zr==0.20.8
+  - dify_plugin>=0.2.0,<0.11.0
+  - pyzipper>=0.4.0,<0.5.0
+  - py7zr>=1.1.4,<2.0.0
 
 ## Installation & Configuration
 
@@ -229,6 +230,9 @@ The plugin automatically recognizes and preserves MIME types for 100+ file forma
 - Large files may take longer to process depending on their size and complexity
 - The compression ratio depends on the type and content of the input files
 - Passwords are only used during compression/decompression and are not stored
+- Extraction is limited to 64 MB uncompressed and 1000 entries (including folders) per archive, to protect the plugin from decompression bombs
+- Archive entries are extracted as flat files; folder paths inside the archive are not preserved
+- The size of each returned file is also subject to Dify's `PLUGIN_MAX_FILE_SIZE` setting
 
 ## Developer Information
 
